@@ -1,3 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user == "Nope" %}
+<a href="http://127.0.0.1:8000/" onclick="{{logout}}">{{user.username}} Go Back and Log In</a>
+{% else %}
+<a href="http://127.0.0.1:8000/" onclick="{{logout}}">{{user.username}} logout</a>
+{{ user }}
+{% endif %}
 <h1>Bookmarks</h1>
 
 {% if bookmarks %}
@@ -23,5 +31,7 @@
 <form method="POST" class="bookmark-form"> 
     {% csrf_token %}
 	{{ form.as_p }}
-	<button type="submit" class="save_btn-default">Save</button>
+	<button type="submit" class="save_btn">Save</button>
 </form>
+{% endblock %}
+
