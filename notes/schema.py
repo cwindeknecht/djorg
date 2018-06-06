@@ -55,18 +55,16 @@ class Query(graphene.ObjectType):
       user = info.context.user
       notes_to_return = []
 
-      if "," in tags:
-        tags = tags.split(",")
+      tags = tags.split(",")
 
       if user.is_anonymous:
         return NoteModel.objects.none()
       else:
         if tags is not None:
           notes = NoteModel.objects.filter(user=user)
-          if len(tags) > 1:
-            for tag in tags:
-              if notes.filter(tags__contains=tag):
-                notes_to_return += notes.filter(tags__contains=tag)
+          for tag in tags:
+            if notes.filter(tags__contains=tag):
+              notes_to_return += notes.filter(tags__contains=tag)
           return notes_to_return
         return NoteModel.objects.none()
 
