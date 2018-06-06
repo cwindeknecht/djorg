@@ -1,8 +1,5 @@
-from django.conf import settings
 from graphene_django import DjangoObjectType
 import graphene
-import uuid
-from graphene_django.filter import DjangoFilterConnectionField
 from .models import Note as NoteModel
 
 class Note(DjangoObjectType):
