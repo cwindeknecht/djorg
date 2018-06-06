@@ -8,16 +8,9 @@ from .models import Note as NoteModel
 class Note(DjangoObjectType):
     class Meta:
         model = NoteModel
-        # filter_fields = {'title','content','created_date','modified_date'}
         interfaces = (graphene.relay.Node,)
 
 class Query(graphene.ObjectType):
-    # notes = graphene.relay.Node.Field(Note)
-    # all_notes = DjangoFilterConnectionField(Note)
-
-    # def resolve_all_notes(self, info, **kwargs):
-    #     return NoteModel.objects.all()
-        
     all_notes = graphene.List(Note)
     single_note = graphene.Field(Note, id=graphene.String(), title=graphene.String())
     matching_notes = graphene.List(Note, content=graphene.String(), title=graphene.String())
@@ -77,7 +70,6 @@ class CreateEditNote(graphene.Mutation):
         return CreateEditNote(ok=ok)
     elif poop:
         ok = True
-        print("Yup1")
         note_to_update = NoteModel.objects.filter(user=user)
         note_to_update = note_to_update.get(note_id = poop)
         if title:
@@ -85,7 +77,6 @@ class CreateEditNote(graphene.Mutation):
         if content:
           note_to_update.content = content
         note_to_update.save()
-        print("Yup1")
         return CreateEditNote(note=note_to_update, ok=ok)
     else:
         ok = True
