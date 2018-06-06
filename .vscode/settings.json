@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "C:\\Users\\knoxv\\.virtualenvs\\codyger-python-GoGMm3sd\\scripts\\python.exe",
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "python.formatting.provider": "black"
 }
